@@ -52,6 +52,7 @@ g12 = mode(c12)
 
 gamma_rate = g1 + g2 + g3 + g4 + g5 + g6 + g7 + g8 + g9 + g10 + g11 + g12
 
-#Result 000100011100 (284), therefore epsilon_rate = 111011100011 (3811)
+#Result = 000100011100 (284), therefore epsilon_rate = 111011100011 (3811)
 print(gamma_rate)
+#Result = 1082324
 print(284 * 3811)
