@@ -1,8 +1,7 @@
 import numpy
-#import scipy
 
 #Import input
-report = open('example_input.txt').readlines()
+report = open('input.txt').readlines()
 #Strip linebreaks
 for i in range(len(report)):
 	report[i] = report[i].rstrip()
@@ -26,15 +25,11 @@ vreport = []
 #Filter for just horizontal or vertical lines
 for coord in range(0, len(report), 4):
 	if report[coord] == report[coord + 2]:
-		vreport.append(report[coord])
-		vreport.append(report[coord + 1])
-		vreport.append(report[coord + 2])
-		vreport.append(report[coord + 3])
+		for i in range(0, 4):
+			vreport.append(report[coord + i])
 	elif report[coord + 1] == report[coord + 3]:
-		hreport.append(report[coord])
-		hreport.append(report[coord + 1])
-		hreport.append(report[coord + 2])
-		hreport.append(report[coord + 3])
+		for i in range(0, 4):
+			hreport.append(report[coord + i])
 
 #Swap coordinates so that they are always small to large
 for coord in range(0, len(vreport), 4):
@@ -44,28 +39,34 @@ for coord in range(0, len(vreport), 4):
 		vreport[coord + 3] = temp
 
 for coord in range(0, len(hreport), 4):
-	if vreport[coord] > vreport[coord + 2]:
-		temp = vreport[coord]
-		vreport[coord] = vreport[coord + 2]
-		vreport[coord + 2] = temp
+	if hreport[coord] > hreport[coord + 2]:
+		temp = hreport[coord]
+		hreport[coord] = hreport[coord + 2]
+		hreport[coord + 2] = temp
 
-
-#Create grid
+#Create grid (numpy.ndarray)
 grid = numpy.zeros((1000, 1000))
 
-print(vreport)
+#Mark vertical lines
 for coord in range(0, len(vreport), 4):
-	temp = grid[vreport[coord + 1]:vreport[coord + 3], coord]
-	for i in range(len(temp)):
-		grid[vreport[coord + 1]]
+	path = grid[vreport[coord + 1]:vreport[coord + 3], vreport[coord]]
+	for i in range(len(path)):
+		grid[vreport[coord], vreport[coord + 1] + i] += 1
+	grid[vreport[coord + 2], vreport[coord + 3]] += 1
 
+#Mark horizontal lines
+for coord in range(0, len(hreport), 4):
+	path = grid[hreport[coord + 1], hreport[coord]:hreport[coord + 2]]
+	for i in range(len(path)):
+		grid[hreport[coord] + i, hreport[coord + 1]] += 1
+	grid[hreport[coord + 2], hreport[coord + 3]] += 1
 
-#print(hreport)
-#print(vreport)
+#Check for overlaps
+overlap = 0
+for row in grid:
+	for i in row:
+		if i > 1:
+			overlap += 1
 
-#for coord in range(0, len(hvreport), 4):
-
-	#grid[hvreport[coord], hvreport[coord + 1]] =+ 1
-	#grid[hvreport[coord + 2], hvreport[coord + 3]] =+ 1
-	
-	
+#Result = 6113
+print(overlap)
