@@ -190,8 +190,8 @@ for draw in range(len(draws)):
 			if draws[draw] == boards[board_number][i]:
 				if i > 0:
 					boards[board_number][i - 1] = True
-			#Check for victory
-			victory_check(board_number, draw)
+				#Check for victory
+				victory_check(board_number, draw)
 			if win == True:
 				break
 		if win == True:
@@ -199,4 +199,4 @@ for draw in range(len(draws)):
 	if win == True:
 		break
 
-#Part 1 answer: Final score: 51776, final draw: 64, winning board: 37
+#Part 2 answer: Final score: 16830, Final Draw: 99, Final Winning Board: 35

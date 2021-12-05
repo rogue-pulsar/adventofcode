@@ -181,8 +181,8 @@ for draw in range(len(draws)):
 			if draws[draw] == boards[board_number][i]:
 				if i > 0:
 					boards[board_number][i - 1] = True
-			#Check for victory
-			victory_check(board_number, draw)
+				#Check for victory
+				victory_check(board_number, draw)
 			if win == True:
 				break
 		if win == True:
