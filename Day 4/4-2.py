@@ -33,6 +33,9 @@ boards = [boards[i:i + 50] for i in range(0, len(boards), 50)]
 #Global win tracker, used to break out of draw and checking loops
 win = False
 
+#Global winning board tracker
+winning_boards = []
+
 '''
 Column positions
 c1p = [0, 1, 10, 11, 20, 21, 30, 31, 40, 41]
@@ -60,9 +63,15 @@ def scoring(board_number, draw):
 		score += 0
 	else:
 		score = score * draws[draw]
-	global win
-	win = True
-	print("Final score is:", score, "The final draw was:", draws[draw], "The winning board was number:", board_number + 1)
+	#Track which boards have won
+	global winning_boards
+	if board_number not in winning_boards:
+		winning_boards.append(board_number)
+	#Only calculate final board score if all boards have won
+	if len(winning_boards) == len(boards):
+		global win
+		win = True
+		print("Final score is:", score, "The final draw was:", draws[draw], "The final winning board was number:", board_number + 1)
 	return
 
 #Loop through each row/column of a given board looking for a False - if none are found, call the scoring function
