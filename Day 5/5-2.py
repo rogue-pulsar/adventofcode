@@ -102,7 +102,6 @@ for row in grid:
 		if i > 1:
 			overlap += 1
 
-#Result = 6113
-
+#Result = 20373
 print(grid.T)
 print(overlap)
