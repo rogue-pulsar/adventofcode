@@ -22,19 +22,19 @@ f7 = 0
 f8 = 0
 
 #Assign initial fish states
-for fish in range(len(fish_list)):
-	if fish_list[fish] == 1:
+for fish_state in range(len(fish_list)):
+	if fish_list[fish_state] == 1:
 		f1 += 1
-	if fish_list[fish] == 2:
+	if fish_list[fish_state] == 2:
 		f2 += 1
-	if fish_list[fish] == 3:
+	if fish_list[fish_state] == 3:
 		f3 += 1
-	if fish_list[fish] == 4:
+	if fish_list[fish_state] == 4:
 		f4 += 1
-	if fish_list[fish] == 5:
+	if fish_list[fish_state] == 5:
 		f5 += 1
 
-#Loop for each day
+#Loop for each day, moving the states down the line and adding new fish
 while day < 256:
 	temp = f0
 	f0 = f1
