@@ -1,5 +1,5 @@
 #Import input from file as a list
-source = open('input.txt').readlines()
+source = open('example_input.txt').readlines()
 
 #Remove linebreaks from list
 for i in range(len(source)):
@@ -49,11 +49,11 @@ for row in range(len(heightmap)):
 				low = False
 		#Check if it is a low point
 		if low == True:
-			low_points.append(heightmap[row][value])
+			low_points.append(row)
+			low_points.append(value)
+#low_points is now a list of integers that form the coordinates of all the low points
 
-#Add one to each point and sum
-for i in range(len(low_points)):
-	low_points[i] += 1
+for low_point in range(0, len(low_points), 2):
+	
 
-#Result = 539
-print(sum(low_points))
+#Check a cell, if there is no 9, check that cell, keep going until you have no cells to check
