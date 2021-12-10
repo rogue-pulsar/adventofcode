@@ -1,5 +1,8 @@
+from skimage.morphology import flood
+import numpy
+
 #Import input from file as a list
-source = open('example_input.txt').readlines()
+source = open('input.txt').readlines()
 
 #Remove linebreaks from list
 for i in range(len(source)):
@@ -53,7 +56,16 @@ for row in range(len(heightmap)):
 			low_points.append(value)
 #low_points is now a list of integers that form the coordinates of all the low points
 
+basin_sizes = []
+#Selects the first integer of each low point coordinate pair
 for low_point in range(0, len(low_points), 2):
-	
+	#Sets the lowpoint to 0, to allow for flood filling
+	heightmap[low_points[low_point]][low_points[low_point + 1]] = 0
+	#Calculates size of basin and adds it to the list
+	basin_sizes.append(numpy.sum((flood(heightmap, (low_points[low_point], low_points[low_point + 1]), connectivity=1, tolerance=8))))
 
-#Check a cell, if there is no 9, check that cell, keep going until you have no cells to check
+#Sort the sizes
+basin_sizes.sort()
+
+#Result = 89, 90, 92 // 736920
+print(basin_sizes[-3] * basin_sizes[-2] * basin_sizes[-1])
