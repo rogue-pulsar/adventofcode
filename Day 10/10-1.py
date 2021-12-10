@@ -1,5 +1,5 @@
 #Import input from file as a list
-source = open('example_input.txt').readlines()
+source = open('input.txt').readlines()
 
 #Remove linebreaks from list
 for i in range(len(source)):
@@ -20,24 +20,38 @@ for row in range(len(source)):
 
 corrupted_closers = []
 for row in range(len(subsystem)):
-	#Ignore incomplete rows
-	if len(subsystem[row])%2 == 0:
-		index = 0
-		current_opener = [subsystem[row][0]]
-		while index <= len(subsystem[row]) - 1:
-			if closing_character_of(subsystem[row][index]) == subsystem[row][index + 1]:
-				index += 1
-			elif subsystem[row][index + 1] in chunk_openers:
-				current_opener.append(subsystem[row][index + 1])
-				index += 1
-			elif closing_character_of(current_opener[-1]) == subsystem[row][index + 1]:
+	index = 0
+	current_opener = [subsystem[row][0]]
+	while index < len(subsystem[row]) - 1:
+		current_character = subsystem[row][index]
+		next_character = subsystem[row][index + 1]
+		if closing_character_of(current_character) == next_character:
+			#Change the current opener since it has been closed
+			if index != 0:
 				current_opener.pop(-1)
-				index += 1
-			elif subsystem[row][index + 1] in chunk_closers:
-				corrupted_closers.append(subsystem[row][index + 1])
-				break
+			index += 1
+		elif next_character in chunk_openers:
+			if index == 0:
+				current_opener.append(current_character)
+			current_opener.append(next_character)
+			index += 1
+		elif closing_character_of(current_opener[-1]) == next_character:
+			current_opener.pop(-1)
+			index += 1
+		elif next_character in chunk_closers:
+			corrupted_closers.append(next_character)
+			break
 
-print(corrupted_closers)
+score = 0
+for i in corrupted_closers:
+	if i == ')':
+		score += 3
+	elif i == ']':
+		score += 57
+	elif i == '}':
+		score += 1197
+	else:
+		score += 25137
 
-
-#Look for closing of current character, if next character is opening, look for closing of that character, if that is found, go back to looking for closing of previous character
+#Result = 319233
+print(score)
