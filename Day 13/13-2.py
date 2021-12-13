@@ -67,5 +67,5 @@ for line in range(len(instructions)):
 
 a = t_paper.tolist()
 for line in a:
-	print(''.join(['X' if char else ' ' for char in line]))
+	print(''.join(['█' if char else ' ' for char in line]))
 #Result = EFJKZLBL
