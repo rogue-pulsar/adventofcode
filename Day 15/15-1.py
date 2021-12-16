@@ -73,27 +73,10 @@ for i in range(len(input_list)):
 print('Edges added')
 
 #Find least expensive path
-paths = nx.all_shortest_paths(map, source = 0, target = len(input_list) - 1, weight = 'weight')
+path = nx.dijkstra_path_length(map, source = 0, target = len(input_list) - 1, weight = 'weight')
 print('Path found')
 
-#Calculate cost
-cost = []
-pathcount = 0
-for path in list(paths):
-	cost.append([-input_list[0]])
-	for i in path:
-		cost[pathcount].append(input_list[i])
-	pathcount += 1
-
-sums = []
-for path in cost:
-	sums.append(sum(path))
-
-sums.sort()
-print(sums[0])
-#Result = 
-#print('Total cost: ', cost)
-
+print('Total cost: ', path)
 # #Display graph
 # nx.draw(map)
 # plt.show()
