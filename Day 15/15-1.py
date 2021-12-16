@@ -2,7 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 #Import instructions
-input_map = open('input.txt').readlines()
+input_map = open('example_input.txt').readlines()
 print('Input loaded')
 #Strip linebreaks
 for i in range(len(input_map)):
@@ -73,10 +73,18 @@ for i in range(len(input_list)):
 print('Edges added')
 
 #Find least expensive path
-path = nx.dijkstra_path_length(map, source = 0, target = len(input_list) - 1, weight = 'weight')
+path = nx.dijkstra_path(map, source = 0, target = len(input_list) - 1, weight = 'weight')
 print('Path found')
 
-print('Total cost: ', path)
-# #Display graph
-# nx.draw(map)
+#Calculate cost
+cost = -input_list[0]
+for i in path:
+	cost += input_list[i]
+print(path)
+#Result = 
+print('Total cost: ', cost)
+print(map)
+
+#Display graph
+# nx.draw_networkx(map, with_labels = True)
 # plt.show()
