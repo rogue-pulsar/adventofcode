@@ -12,4 +12,4 @@ N/A
 ![](https://img.shields.io/badge/stars%20⭐-26-yellow)
 ![](https://img.shields.io/badge/days%20completed-13-red)
 
-Note that 2021 file imports are all broken and need to have a path added due to the folder structure change
+2021 file imports are broken and need to have a path added due to the folder structure change
